@@ -6,7 +6,7 @@ from datetime import datetime
 # bbc time formate is not standard , so we have to transform it.
 def normalize_date(entry): # entry is one item in xml file , it is in form of dictioanry
     if entry.get("published_parsed"): #Returns the value if the key exists, otherwise None . if return none then this block of code skip.
-        return (datetime(*entry["published_parsed"][:6]))# datetime(2026, 1, 12, 19, 38, 53) = 2026-01-12 19:38:53 but it is datetime object
+        return (datetime(*entry["published_parsed"][:6])).strftime("%Y-%m-%d %H:%M:%S")# datetime(2026, 1, 12, 19, 38, 53) = 2026-01-12 19:38:53 but it is datetime object
     return ""
 
 # extract the categories fron the rss_link 
@@ -89,3 +89,5 @@ def extract_rss_to_excel(rss_urls, output_file="rss_output.xlsx"):
 if __name__=="__main__":
     rss_feed_links = ["https://feeds.bbci.co.uk/news/technology/rss.xml"]
     extract_rss_to_excel(rss_feed_links, "news_data.xlsx")
+
+
